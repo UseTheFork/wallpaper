@@ -181,7 +181,7 @@ def main():
     convert_to_png()
 
     print("Renumbering files...")
-    renumber_files()
+    # renumber_files()
 
     print("Creating thumbnails...")
     image_files = create_thumbnails()
