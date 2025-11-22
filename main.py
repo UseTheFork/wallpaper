@@ -1,4 +1,5 @@
 import os
+import subprocess
 
 from PIL import Image
 
@@ -7,9 +8,11 @@ def create_thumbnails():
     """Create thumbnails for all images in the 'all' directory"""
     all_dir = "all"
     thumb_dir = "thumbnails"
+    catppuccin_dir = "catppuccin_mocha"
 
     # Create thumbnails directory if it doesn't exist
     os.makedirs(thumb_dir, exist_ok=True)
+    os.makedirs(catppuccin_dir, exist_ok=True)
 
     # Get all PNG files from the all directory
     if not os.path.exists(all_dir):
@@ -22,6 +25,10 @@ def create_thumbnails():
     for filename in image_files:
         img_path = os.path.join(all_dir, filename)
         thumb_path = os.path.join(thumb_dir, filename)
+        catppuccin_path = os.path.join(catppuccin_dir, filename)
+
+        # Convert with lutgen to catppuccin-mocha
+        subprocess.run(['lutgen', 'apply', img_path, '-p', 'catppuccin-mocha', '-o', catppuccin_path])
 
         # Open image and create thumbnail
         with Image.open(img_path) as img:
