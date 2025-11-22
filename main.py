@@ -41,7 +41,7 @@ def renumber_files():
     # Rename from temporary names to final sequential names
     for i, temp_name in enumerate(temp_names):
         temp_path = os.path.join(all_dir, temp_name)
-        new_name = f"{i + 1}.png"
+        new_name = f"{i + 1:03d}.png"
         new_path = os.path.join(all_dir, new_name)
         os.rename(temp_path, new_path)
 
@@ -67,13 +67,22 @@ def convert_to_png():
             new_filename = name_without_ext + ".png"
             new_path = os.path.join(all_dir, new_filename)
 
-            # Convert to PNG
-            with Image.open(img_path) as img:
-                img.save(new_path, "PNG")
+            try:
+                # Convert to PNG
+                with Image.open(img_path) as img:
+                    # Convert to RGB if necessary (handles RGBA, P, etc.)
+                    if img.mode not in ('RGB', 'L'):
+                        img = img.convert('RGB')
+                    img.save(new_path, "PNG")
 
-            # Delete original file
-            os.remove(img_path)
-            print(f"Converted {filename} to {new_filename}")
+                # Delete original file only after successful conversion
+                os.remove(img_path)
+                print(f"Converted {filename} to {new_filename}")
+            except Exception as e:
+                print(f"Error converting {filename}: {e}")
+                # If conversion failed and new file was created, remove it
+                if os.path.exists(new_path):
+                    os.remove(new_path)
 
 
 def create_thumbnails():
@@ -99,23 +108,29 @@ def create_thumbnails():
         thumb_path = os.path.join(thumb_dir, filename)
         catppuccin_path = os.path.join(catppuccin_dir, filename)
 
-        # Convert with lutgen to catppuccin-mocha
-        subprocess.run(
-            [
-                "lutgen",
-                "apply",
-                img_path,
-                "-p",
-                "catppuccin-mocha",
-                "-o",
-                catppuccin_path,
-            ]
-        )
+        try:
+            # Verify the image can be opened before processing
+            with Image.open(img_path) as img:
+                # Convert with lutgen to catppuccin-mocha
+                subprocess.run(
+                    [
+                        "lutgen",
+                        "apply",
+                        img_path,
+                        "-p",
+                        "catppuccin-mocha",
+                        "-o",
+                        catppuccin_path,
+                    ],
+                    check=True
+                )
 
-        # Open image and create thumbnail
-        with Image.open(img_path) as img:
-            img.thumbnail((200, 200))
-            img.save(thumb_path)
+                # Create thumbnail
+                img.thumbnail((200, 200))
+                img.save(thumb_path)
+        except Exception as e:
+            print(f"Error processing {filename}: {e}")
+            continue
 
     return image_files
 
