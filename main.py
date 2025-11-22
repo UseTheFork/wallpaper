@@ -4,6 +4,38 @@ import subprocess
 from PIL import Image
 
 
+def convert_to_png():
+    """Convert all images in the 'all' directory to PNG format"""
+    all_dir = "all"
+
+    if not os.path.exists(all_dir):
+        print(f"Directory '{all_dir}' not found")
+        return
+
+    # Get all image files
+    image_files = [
+        f
+        for f in os.listdir(all_dir)
+        if f.endswith((".png", ".jpg", ".jpeg", ".bmp", ".gif"))
+    ]
+
+    for filename in image_files:
+        if not filename.endswith(".png"):
+            img_path = os.path.join(all_dir, filename)
+            # Create new filename with .png extension
+            name_without_ext = os.path.splitext(filename)[0]
+            new_filename = name_without_ext + ".png"
+            new_path = os.path.join(all_dir, new_filename)
+
+            # Convert to PNG
+            with Image.open(img_path) as img:
+                img.save(new_path, "PNG")
+
+            # Delete original file
+            os.remove(img_path)
+            print(f"Converted {filename} to {new_filename}")
+
+
 def create_thumbnails():
     """Create thumbnails for all images in the 'all' directory"""
     all_dir = "all"
@@ -19,7 +51,9 @@ def create_thumbnails():
         print(f"Directory '{all_dir}' not found")
         return []
 
-    image_files = sorted([f for f in os.listdir(all_dir) if f.endswith((".png", ".jpg"))])
+    image_files = sorted(
+        [f for f in os.listdir(all_dir) if f.endswith((".png", ".jpg"))]
+    )
 
     # Create thumbnails
     for filename in image_files:
@@ -28,7 +62,17 @@ def create_thumbnails():
         catppuccin_path = os.path.join(catppuccin_dir, filename)
 
         # Convert with lutgen to catppuccin-mocha
-        subprocess.run(['lutgen', 'apply', img_path, '-p', 'catppuccin-mocha', '-o', catppuccin_path])
+        subprocess.run(
+            [
+                "lutgen",
+                "apply",
+                img_path,
+                "-p",
+                "catppuccin-mocha",
+                "-o",
+                catppuccin_path,
+            ]
+        )
 
         # Open image and create thumbnail
         with Image.open(img_path) as img:
@@ -76,6 +120,9 @@ Disclaimer: These wallpapers are sourced from many, many, many sources on the in
 
 
 def main():
+    print("Converting images to PNG...")
+    convert_to_png()
+
     print("Creating thumbnails...")
     image_files = create_thumbnails()
 
