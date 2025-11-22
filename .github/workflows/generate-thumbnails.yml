@@ -23,9 +23,9 @@ jobs:
         uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
-          
-      - name: Install lutgen-rs
-        run: cargo install lutgen-rs
+
+      - name: Install lutgen
+        run: cargo install lutgen-cli
       
       - name: Run thumbnail generation
         run: uv run main.py
