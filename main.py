@@ -4,6 +4,50 @@ import subprocess
 from PIL import Image
 
 
+def clear_output_directories():
+    """Clear the thumbnails and catppuccin_mocha directories"""
+    thumb_dir = "thumbnails"
+    catppuccin_dir = "catppuccin_mocha"
+
+    for directory in [thumb_dir, catppuccin_dir]:
+        if os.path.exists(directory):
+            for filename in os.listdir(directory):
+                file_path = os.path.join(directory, filename)
+                if os.path.isfile(file_path):
+                    os.remove(file_path)
+            print(f"Cleared {directory}/")
+
+
+def renumber_files():
+    """Renumber all PNG files in the 'all' directory sequentially"""
+    all_dir = "all"
+
+    if not os.path.exists(all_dir):
+        print(f"Directory '{all_dir}' not found")
+        return
+
+    # Get all PNG files and sort them
+    png_files = sorted([f for f in os.listdir(all_dir) if f.endswith(".png")])
+
+    # Rename files to temporary names first to avoid conflicts
+    temp_names = []
+    for i, filename in enumerate(png_files):
+        old_path = os.path.join(all_dir, filename)
+        temp_name = f"temp_{i}.png"
+        temp_path = os.path.join(all_dir, temp_name)
+        os.rename(old_path, temp_path)
+        temp_names.append(temp_name)
+
+    # Rename from temporary names to final sequential names
+    for i, temp_name in enumerate(temp_names):
+        temp_path = os.path.join(all_dir, temp_name)
+        new_name = f"{i + 1}.png"
+        new_path = os.path.join(all_dir, new_name)
+        os.rename(temp_path, new_path)
+
+    print(f"Renumbered {len(png_files)} files")
+
+
 def convert_to_png():
     """Convert all images in the 'all' directory to PNG format"""
     all_dir = "all"
@@ -13,11 +57,7 @@ def convert_to_png():
         return
 
     # Get all image files
-    image_files = [
-        f
-        for f in os.listdir(all_dir)
-        if f.endswith((".png", ".jpg", ".jpeg", ".bmp", ".gif"))
-    ]
+    image_files = [f for f in os.listdir(all_dir) if f.endswith((".png", ".jpg", ".jpeg", ".bmp", ".gif"))]
 
     for filename in image_files:
         if not filename.endswith(".png"):
@@ -51,9 +91,7 @@ def create_thumbnails():
         print(f"Directory '{all_dir}' not found")
         return []
 
-    image_files = sorted(
-        [f for f in os.listdir(all_dir) if f.endswith((".png", ".jpg"))]
-    )
+    image_files = sorted([f for f in os.listdir(all_dir) if f.endswith((".png", ".jpg"))])
 
     # Create thumbnails
     for filename in image_files:
@@ -120,8 +158,14 @@ Disclaimer: These wallpapers are sourced from many, many, many sources on the in
 
 
 def main():
+    print("Clearing output directories...")
+    clear_output_directories()
+
     print("Converting images to PNG...")
     convert_to_png()
+
+    print("Renumbering files...")
+    renumber_files()
 
     print("Creating thumbnails...")
     image_files = create_thumbnails()
