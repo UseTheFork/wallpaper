@@ -141,38 +141,34 @@ def create_thumbnails():
 def update_readme(image_files):
     """Update README.md with a grid of thumbnail images"""
     readme_path = "README.MD"
+    template_path = "README_TEMPLATE.md"
 
-    # Create markdown content with header
-    header = """# UseTheFork's walls
+    # Read template
+    with open(template_path, "r") as f:
+        template = f.read()
 
-Hi! This is my repository of wallpapers which I've collected over the years.
-
-Disclaimer: These wallpapers are sourced from many, many, many sources on the internet. I did not make any of these, although I have *edited* several of them a little bit and use lutgen to convert them to the catppuccin-mocha colour scheme. Zero credit belongs to me in that regard, I'm simply the collector. If you are the artist of one of these wallpapers, please **contact me** I will happily take the wallpaper down or add credit in this README.
-
-**Note:** Catppuccin Mocha versions of all wallpapers are automatically generated and available in the `catppuccin_mocha/` directory.
-
-# Preview
-| Column 1 | Column 2 | Column 3 | Column 4 |
-| -------- | -------- | -------- | -------- |
-"""
-
-    # Create table rows with 4 columns
-    grid_content = header
+    # Create table header and rows with 4 columns
+    thumbnails_content = "| Column 1 | Column 2 | Column 3 | Column 4 |\n"
+    thumbnails_content += "| -------- | -------- | -------- | -------- |\n"
+    
     cols = 4
     for i in range(0, len(image_files), cols):
         row_files = image_files[i : i + cols]
 
         # Add images in this row
-        grid_content += "| "
+        thumbnails_content += "| "
         for filename in row_files:
             thumb_path = f"thumbnails/{filename}"
             full_path = f"all/{filename}"
-            grid_content += f"[![{filename}]({thumb_path})]({full_path}) | "
-        grid_content += "\n"
+            thumbnails_content += f"[![{filename}]({thumb_path})]({full_path}) | "
+        thumbnails_content += "\n"
+
+    # Replace placeholder with thumbnails content
+    readme_content = template.replace("{{thumbnails}}", thumbnails_content)
 
     # Write to README
     with open(readme_path, "w") as f:
-        f.write(grid_content)
+        f.write(readme_content)
 
 
 def main():

@@ -22,3 +22,12 @@ Disclaimer: These wallpapers are sourced from many, many, many sources on the in
 | [![041.png](thumbnails/041.png)](all/041.png) | [![042.png](thumbnails/042.png)](all/042.png) | [![043.png](thumbnails/043.png)](all/043.png) | [![044.png](thumbnails/044.png)](all/044.png) | 
 | [![045.png](thumbnails/045.png)](all/045.png) | [![046.png](thumbnails/046.png)](all/046.png) | [![047.png](thumbnails/047.png)](all/047.png) | [![048.png](thumbnails/048.png)](all/048.png) | 
 | [![049.png](thumbnails/049.png)](all/049.png) | [![050.png](thumbnails/050.png)](all/050.png) | [![051.png](thumbnails/051.png)](all/051.png) | [![052.png](thumbnails/052.png)](all/052.png) | 
+
+
+
+# Sources
+
+These wallpapers have been collected from various sources across the internet. Here are some of the collections that inspired or contributed to this repository:
+
+ - https://github.com/orangci/walls-catppuccin-mocha
+ - https://github.com/zhichaoh/catppuccin-wallpapers
