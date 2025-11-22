@@ -150,7 +150,7 @@ def update_readme(image_files):
     # Create table header and rows with 4 columns
     thumbnails_content = "| Column 1 | Column 2 | Column 3 | Column 4 |\n"
     thumbnails_content += "| -------- | -------- | -------- | -------- |\n"
-    
+
     cols = 4
     for i in range(0, len(image_files), cols):
         row_files = image_files[i : i + cols]
