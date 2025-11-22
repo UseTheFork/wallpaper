@@ -1,7 +1,9 @@
 import os
 import subprocess
 
-from PIL import Image
+from PIL import Image, ImageFile
+
+ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 
 def clear_output_directories():
@@ -181,7 +183,7 @@ def main():
     convert_to_png()
 
     print("Renumbering files...")
-    # renumber_files()
+    renumber_files()
 
     print("Creating thumbnails...")
     image_files = create_thumbnails()
