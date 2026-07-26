@@ -1,5 +1,4 @@
 import os
-import subprocess
 
 from PIL import Image, ImageFile
 
@@ -7,11 +6,10 @@ ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 
 def clear_output_directories():
-    """Clear the thumbnails and catppuccin_mocha directories"""
+    """Clear the thumbnails directories"""
     thumb_dir = "thumbnails"
-    catppuccin_dir = "catppuccin_mocha"
 
-    for directory in [thumb_dir, catppuccin_dir]:
+    for directory in [thumb_dir]:
         if os.path.exists(directory):
             for filename in os.listdir(directory):
                 file_path = os.path.join(directory, filename)
@@ -92,12 +90,8 @@ def create_thumbnails():
     """Create thumbnails for all images in the 'all' directory"""
     all_dir = "all"
     thumb_dir = "thumbnails"
-    catppuccin_dir = "catppuccin_mocha"
-
     # Create thumbnails directory if it doesn't exist
     os.makedirs(thumb_dir, exist_ok=True)
-    os.makedirs(catppuccin_dir, exist_ok=True)
-
     # Get all PNG files from the all directory
     if not os.path.exists(all_dir):
         print(f"Directory '{all_dir}' not found")
@@ -109,24 +103,22 @@ def create_thumbnails():
     for filename in image_files:
         img_path = os.path.join(all_dir, filename)
         thumb_path = os.path.join(thumb_dir, filename)
-        catppuccin_path = os.path.join(catppuccin_dir, filename)
-
         try:
             # Verify the image can be opened before processing
             with Image.open(img_path) as img:
-                # Convert with lutgen to catppuccin-mocha
-                subprocess.run(
-                    [
-                        "lutgen",
-                        "apply",
-                        img_path,
-                        "-p",
-                        "catppuccin-mocha",
-                        "-o",
-                        catppuccin_path,
-                    ],
-                    check=True,
-                )
+                # # Convert with lutgen to catppuccin-mocha
+                # subprocess.run(
+                #     [
+                #         "lutgen",
+                #         "apply",
+                #         img_path,
+                #         "-p",
+                #         "catppuccin-mocha",
+                #         "-o",
+                #         catppuccin_path,
+                #     ],
+                #     check=True,
+                # )
 
                 # Create thumbnail
                 img.thumbnail((200, 200))
@@ -148,7 +140,7 @@ def update_readme(image_files):
         template = f.read()
 
     # Create table header and rows with 4 columns
-    thumbnails_content = "| Column 1 | Column 2 | Column 3 | Column 4 |\n"
+    thumbnails_content = "| 1 | 2 | 3 | 4 |\n"
     thumbnails_content += "| -------- | -------- | -------- | -------- |\n"
 
     cols = 4

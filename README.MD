@@ -7,7 +7,7 @@ Disclaimer: These wallpapers are sourced from many, many, many sources on the in
 **Note:** Catppuccin Mocha versions of all wallpapers are automatically generated and available in the `catppuccin_mocha/` directory.
 
 # Preview
-| Column 1 | Column 2 | Column 3 | Column 4 |
+| 1 | 2 | 3 | 4 |
 | -------- | -------- | -------- | -------- |
 | [![001.png](thumbnails/001.png)](all/001.png) | [![002.png](thumbnails/002.png)](all/002.png) | [![003.png](thumbnails/003.png)](all/003.png) | [![004.png](thumbnails/004.png)](all/004.png) | 
 | [![005.png](thumbnails/005.png)](all/005.png) | [![006.png](thumbnails/006.png)](all/006.png) | [![007.png](thumbnails/007.png)](all/007.png) | [![008.png](thumbnails/008.png)](all/008.png) | 
@@ -37,6 +37,11 @@ Disclaimer: These wallpapers are sourced from many, many, many sources on the in
 | [![101.png](thumbnails/101.png)](all/101.png) | [![102.png](thumbnails/102.png)](all/102.png) | [![103.png](thumbnails/103.png)](all/103.png) | [![104.png](thumbnails/104.png)](all/104.png) | 
 | [![105.png](thumbnails/105.png)](all/105.png) | [![106.png](thumbnails/106.png)](all/106.png) | [![107.png](thumbnails/107.png)](all/107.png) | [![108.png](thumbnails/108.png)](all/108.png) | 
 | [![109.png](thumbnails/109.png)](all/109.png) | [![110.png](thumbnails/110.png)](all/110.png) | [![111.png](thumbnails/111.png)](all/111.png) | [![112.png](thumbnails/112.png)](all/112.png) | 
+| [![113.png](thumbnails/113.png)](all/113.png) | [![114.png](thumbnails/114.png)](all/114.png) | [![115.png](thumbnails/115.png)](all/115.png) | [![116.png](thumbnails/116.png)](all/116.png) | 
+| [![117.png](thumbnails/117.png)](all/117.png) | [![118.png](thumbnails/118.png)](all/118.png) | [![119.png](thumbnails/119.png)](all/119.png) | [![120.png](thumbnails/120.png)](all/120.png) | 
+| [![121.png](thumbnails/121.png)](all/121.png) | [![122.png](thumbnails/122.png)](all/122.png) | [![123.png](thumbnails/123.png)](all/123.png) | [![124.png](thumbnails/124.png)](all/124.png) | 
+| [![125.png](thumbnails/125.png)](all/125.png) | [![126.png](thumbnails/126.png)](all/126.png) | [![127.png](thumbnails/127.png)](all/127.png) | [![128.png](thumbnails/128.png)](all/128.png) | 
+| [![129.png](thumbnails/129.png)](all/129.png) | [![130.png](thumbnails/130.png)](all/130.png) | 
 
 
 # Credits
